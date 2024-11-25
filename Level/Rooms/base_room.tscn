@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmdp3qo6nl6ah"]
+
+[ext_resource type="Script" path="res://Level/Rooms/base_room.gd" id="1_0quum"]
+[ext_resource type="PackedScene" uid="uid://dd6ruw6qhntbu" path="res://TileMap/base_tile_map_layer.tscn" id="1_3cawx"]
+[ext_resource type="PackedScene" uid="uid://dv2s8lisyx1pt" path="res://Level/Random/game_camera.tscn" id="1_t3v6j"]
+[ext_resource type="PackedScene" uid="uid://53slefq2boxi" path="res://Player/player.tscn" id="2_wp3ih"]
+
+[node name="BaseRoom" type="Node2D"]
+script = ExtResource("1_0quum")
+
+[node name="BaseTileMapLayer" parent="." instance=ExtResource("1_3cawx")]
+
+[node name="Player" parent="." instance=ExtResource("2_wp3ih")]
+
+[node name="GameCamera" parent="." instance=ExtResource("1_t3v6j")]
+target_path = NodePath("../CenterMarker")
+
+[node name="CenterMarker" type="Marker2D" parent="."]
+position = Vector2(240, 135)

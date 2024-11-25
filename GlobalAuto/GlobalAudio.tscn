@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyekkt20x2j5k"]
+
+[ext_resource type="Script" path="res://GlobalAuto/global_audio.gd" id="1_qw58s"]
+
+[node name="GlobalAudio" type="Node"]
+process_mode = 3
+script = ExtResource("1_qw58s")
+
+[node name="BGMplayer" type="AudioStreamPlayer2D" parent="."]
+bus = &"BGM"
+
+[node name="SEplayers" type="Node" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SEplayers"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="SEplayers"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="SEplayers"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="SEplayers"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="SEplayers"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D6" type="AudioStreamPlayer2D" parent="SEplayers"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D7" type="AudioStreamPlayer2D" parent="SEplayers"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D8" type="AudioStreamPlayer2D" parent="SEplayers"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D9" type="AudioStreamPlayer2D" parent="SEplayers"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D10" type="AudioStreamPlayer2D" parent="SEplayers"]
+bus = &"SFX"
