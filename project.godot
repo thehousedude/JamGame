@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameState="*res://GlobalAuto/game_state.tscn"
 Gui="*res://GlobalAuto/gui.tscn"
 GlobalAudio="*res://GlobalAuto/GlobalAudio.tscn"
+GameManager="*res://GlobalAuto/game_manager.gd"
 
 [display]
 

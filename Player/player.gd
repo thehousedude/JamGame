@@ -23,9 +23,12 @@ const BOUNCE_THRESHOLD = 80  # 5格 = 16 * 5 = 80
 const GRAVITY_FLIP_THRESHOLD = 112  # 7格 = 16 * 7 = 112
 const BOUNCE_FORCE = Vector2(0, -250)  # 向上弹跳的力度
 
+#反重力状态
+var is_antiG = false
+
 # 动画播放器
 @onready var animation_player = $AnimationPlayer
-@onready var sprite = $Sprite2D
+@onready var sprite = $Sprite2D2
 
 signal player_died
 
@@ -91,6 +94,7 @@ func flip_gravity():
 	gravity_direction = GravityDirection.UP if gravity_direction == GravityDirection.DOWN else GravityDirection.DOWN
 	sprite.scale.y = -sprite.scale.y
 	falling_distance = 0  # 重置下落距离
+	is_antiG = true #设置反重力状态 用于动画
 
 
 func bounce(force: Vector2):
@@ -112,7 +116,10 @@ func update_animation():
 		if abs(velocity.x) > 0:
 			animation_player.play("walk")
 		else:
-			animation_player.play("idle")
+			if is_antiG == false:
+				animation_player.play("idle")
+			else:
+				animation_player.play("anti_gravity")
 	else:
 		if velocity.y * (1 if gravity_direction == GravityDirection.DOWN else -1) < 0:
 			animation_player.play("jump")
