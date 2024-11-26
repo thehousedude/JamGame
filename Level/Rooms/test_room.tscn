@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://c8dkm5ip7tnev"]
+[gd_scene load_steps=8 format=4 uid="uid://c8dkm5ip7tnev"]
 
 [ext_resource type="PackedScene" uid="uid://bmdp3qo6nl6ah" path="res://Level/Rooms/base_room.tscn" id="1_qsdmk"]
 [ext_resource type="Texture2D" uid="uid://cuf6o4e6wpful" path="res://Release/Backgrounds/BackgroundDark.png" id="2_ctaha"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://j46ywocn583x" path="res://Player/spring.tscn" id="4_6tkj2"]
 [ext_resource type="PackedScene" uid="uid://dah76qsks63qm" path="res://Level/Random/snow_gpu_particles.tscn" id="5_crmua"]
 [ext_resource type="PackedScene" uid="uid://bmu02bsmg5712" path="res://Level/Random/spike.tscn" id="6_ydt7d"]
+[ext_resource type="PackedScene" uid="uid://cwxskt2xb2ojq" path="res://Level/Random/Teddy.tscn" id="7_drte8"]
 
 [node name="testRoom" instance=ExtResource("1_qsdmk")]
 
@@ -37,3 +38,6 @@ rotation = 3.14159
 [node name="Spike2" parent="." index="9" instance=ExtResource("6_ydt7d")]
 position = Vector2(40, 16)
 rotation = 3.14159
+
+[node name="Teddy" parent="." index="10" instance=ExtResource("7_drte8")]
+position = Vector2(251, 141)

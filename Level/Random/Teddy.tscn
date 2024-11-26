@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwxskt2xb2ojq"]
+
+[ext_resource type="Script" path="res://Level/Random/teddy.gd" id="1_qgwdf"]
+[ext_resource type="Texture2D" uid="uid://du5ee7d3ojo2h" path="res://Assets/Texture/Items/teddy.png" id="2_4nqie"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hrbly"]
+radius = 8.0
+
+[node name="Teddy" type="Node2D"]
+script = ExtResource("1_qgwdf")
+
+[node name="Teddy" type="Sprite2D" parent="."]
+texture = ExtResource("2_4nqie")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_hrbly")
+
+[connection signal="body_entered" from="Area2D" to="." method="被玩家取得"]
