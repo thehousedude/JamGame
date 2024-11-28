@@ -1,23 +1,139 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0pippok88o1b"]
+[gd_scene load_steps=13 format=3 uid="uid://c0pippok88o1b"]
 
 [ext_resource type="Script" path="res://UI/gamestart.gd" id="1_xiivw"]
+[ext_resource type="Texture2D" uid="uid://cnuc7q3rtjsyc" path="res://Assets/Texture/Story/1.png" id="2_0wvye"]
+[ext_resource type="Texture2D" uid="uid://ba5dk5bib64nr" path="res://Assets/Texture/Story/2.png" id="3_gaeb0"]
+[ext_resource type="Texture2D" uid="uid://b6ef08h4h3q6s" path="res://Assets/Texture/Story/3.png" id="4_6lhig"]
+[ext_resource type="Texture2D" uid="uid://lm7lvgkejdac" path="res://Assets/Texture/Story/4.png" id="5_xxpri"]
+[ext_resource type="FontFile" uid="uid://cj03ms2nqhwkt" path="res://Assets/Font/AlimamaFangYuanTiVF-Thin.ttf" id="6_m4ul7"]
+[ext_resource type="Texture2D" uid="uid://bnruv8nasmny5" path="res://Assets/Texture/Story/5.png" id="6_vossl"]
+[ext_resource type="Texture2D" uid="uid://ciibxeqmmfsss" path="res://Assets/Texture/Story/6.png" id="7_1m4bu"]
+
+[sub_resource type="FontVariation" id="FontVariation_7ol5n"]
+base_font = ExtResource("6_m4ul7")
+variation_embolden = 0.6
+spacing_glyph = 5
+spacing_top = 10
+
+[sub_resource type="Animation" id="Animation_x5cvp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_cupdt"]
+resource_name = "打字"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qhhdi"]
+_data = {
+"RESET": SubResource("Animation_x5cvp"),
+"打字": SubResource("Animation_cupdt")
+}
 
 [node name="Gamestart" type="Node2D"]
 z_index = 5
 script = ExtResource("1_xiivw")
+"插图1" = ExtResource("2_0wvye")
+"插图2" = ExtResource("3_gaeb0")
+"插图3" = ExtResource("4_6lhig")
+"插图4" = ExtResource("5_xxpri")
+"插图5" = ExtResource("6_vossl")
+"插图6" = ExtResource("7_1m4bu")
+"故事文本1" = "“小熊不见了，我得去找它”"
+"故事文本2" = " “好大的雪，但是我必须要找到小熊才行”"
+"故事文本3" = "“我找了好久，但还是没有找到”"
+"故事文本4" = " “都怪我，是我没照顾好小熊......”"
+"故事文本5" = "  “明明和奶奶约定好了，等小熊长大了，就会回来看我”"
+"故事文本6" = "“小熊，你在哪......不要留下我一个人”"
+"故事文本7" = " “我已经把奶奶弄丢了，不能再弄丢小熊了”"
 
-[node name="Label" type="Label" parent="."]
-offset_left = 790.0
-offset_top = 458.0
-offset_right = 950.0
-offset_bottom = 481.0
-text = "按下任意按键开始游戏"
+[node name="开场动画" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 
-[node name="Button" type="Button" parent="."]
-offset_left = 137.0
-offset_top = 39.0
-offset_right = 738.0
-offset_bottom = 414.0
-text = "我是任意按键"
+[node name="ColorRect" type="ColorRect" parent="开场动画"]
+layout_mode = 0
+offset_left = -43.0
+offset_top = -28.0
+offset_right = 1963.0
+offset_bottom = 1124.0
+color = Color(0, 0, 0, 1)
 
-[connection signal="pressed" from="Button" to="." method="开始游戏"]
+[node name="Sprite2D" type="TextureRect" parent="开场动画"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 481.0
+offset_top = 140.0
+offset_right = 1439.0
+offset_bottom = 767.0
+grow_horizontal = 2
+pivot_offset = Vector2(479, 0)
+texture = ExtResource("2_0wvye")
+
+[node name="Label" type="Label" parent="开场动画"]
+texture_filter = 2
+layout_mode = 0
+offset_top = 829.0
+offset_right = 3836.0
+offset_bottom = 1260.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = SubResource("FontVariation_7ol5n")
+theme_override_font_sizes/font_size = 100
+text = "“我已经把奶奶弄丢了，不能再弄丢小熊了”"
+horizontal_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Button" type="Button" parent="开场动画"]
+layout_mode = 0
+offset_left = 1701.0
+offset_top = 886.0
+offset_right = 1861.0
+offset_bottom = 1010.0
+text = "播放"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="开场动画"]
+libraries = {
+"": SubResource("AnimationLibrary_qhhdi")
+}
+autoplay = "打字"
+
+[node name="提示文本" type="Node2D" parent="."]
+position = Vector2(-216, 182)
+
+[node name="Label2" type="Label" parent="提示文本"]
+texture_filter = 2
+offset_left = 216.0
+offset_top = 688.0
+offset_right = 4056.0
+offset_bottom = 1108.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = SubResource("FontVariation_7ol5n")
+theme_override_font_sizes/font_size = 100
+text = "按下任意键开始游戏"
+horizontal_alignment = 1
+
+[connection signal="button_up" from="开场动画/Button" to="." method="播放下一张"]
