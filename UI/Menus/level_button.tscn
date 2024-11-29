@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtd1nor2m1g30"]
+
+[ext_resource type="Script" path="res://UI/Menus/level_button.gd" id="1_de7mh"]
+
+[node name="Level_button" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_de7mh")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

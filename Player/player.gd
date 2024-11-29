@@ -3,7 +3,8 @@ class_name Player
 
 @export var SPEED = 80.0
 @export var JUMP_VELOCITY = -200.0
-@export var GRAVITY = 600
+@export var FALL_GRAVITY = 600.0  # 坠落重力
+@export var JUMP_GRAVITY = 400.0  # 跳跃重力
 
 # 状态机
 enum PlayerState {NORMAL, INTERACTING}
@@ -13,6 +14,7 @@ var current_state = PlayerState.NORMAL
 enum GravityDirection {DOWN, UP}
 var gravity_direction = GravityDirection.DOWN
 var can_flip_gravity = true  # 是否可以进行重力反转检测
+signal gravity_change
 # 交互状态标志
 var is_interacting = false
 
@@ -23,19 +25,20 @@ const BOUNCE_THRESHOLD = 80  # 5格 = 16 * 5 = 80
 const GRAVITY_FLIP_THRESHOLD = 112  # 7格 = 16 * 7 = 112
 const BOUNCE_FORCE = Vector2(0, -250)  # 向上弹跳的力度
 
+#反重力状态
+var is_antiG = false
+
 # 动画播放器
 @onready var animation_player = $AnimationPlayer
-@onready var sprite = $Sprite2D
+@onready var sprite = $Sprite2D2
 
 signal player_died
-
 
 func _ready():
 	pass
 
 func _physics_process(delta):
 	# 重力处理
-	
 	var gravity_factor = 1 if gravity_direction == GravityDirection.DOWN else -1
 	
 	# 跟踪下落距离
@@ -63,7 +66,10 @@ func _physics_process(delta):
 
 func update_falling(delta, gravity_factor):
 	if !is_grounded():
-		velocity.y += GRAVITY * gravity_factor * delta
+		# 根据垂直速度决定使用哪种重力
+		var gravity = FALL_GRAVITY if is_falling_down() else JUMP_GRAVITY
+		velocity.y += gravity * gravity_factor * delta
+		
 		if (gravity_direction == GravityDirection.DOWN and velocity.y > 0) or \
 		   (gravity_direction == GravityDirection.UP and velocity.y < 0):
 			is_falling = true
@@ -87,15 +93,21 @@ func update_falling(delta, gravity_factor):
 		is_falling = false
 		falling_distance = 0
 
+func is_falling_down() -> bool:
+	if gravity_direction == GravityDirection.DOWN:
+		return velocity.y > 0
+	else:
+		return velocity.y < 0
+
 func flip_gravity():
 	gravity_direction = GravityDirection.UP if gravity_direction == GravityDirection.DOWN else GravityDirection.DOWN
 	sprite.scale.y = -sprite.scale.y
 	falling_distance = 0  # 重置下落距离
-
+	is_antiG = !is_antiG #设置反重力状态 用于动画
+	gravity_change.emit()
 
 func bounce(force: Vector2):
 	velocity = force
-	
 
 func start_interacting():
 	is_interacting = true
@@ -112,15 +124,16 @@ func update_animation():
 		if abs(velocity.x) > 0:
 			animation_player.play("walk")
 		else:
-			animation_player.play("idle")
+			if is_antiG == false:
+				animation_player.play("idle")
+			else:
+				animation_player.play("anti_gravity")
 	else:
 		if velocity.y * (1 if gravity_direction == GravityDirection.DOWN else -1) < 0:
 			animation_player.play("jump")
 		else:
 			animation_player.play("fell")
 
-
-# 修改 die 函数
 func die():
 	emit_signal("player_died")
 	animation_player.play("death")
@@ -130,11 +143,9 @@ func die():
 	set_collision_layer_value(1, false)
 	set_collision_mask_value(1, false)
 
-# 修改碰撞检测函数
 func _on_hazard_detector_area_entered(area: Area2D):
 	if area.is_in_group("hazards"):
 		die()
-
 
 func _on_interactable_area_entered(_area):
 	if _area.is_in_group("interactables"):

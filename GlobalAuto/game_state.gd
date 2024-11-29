@@ -4,6 +4,8 @@ extends Node
 const CONFIG_PATH:String="user://config.ini"
 const SAVE_PATH = "user://save.json"
 
+@export var 通关关卡=0
+
 @export var flags=[]
 
 func 拥有旗帜(旗帜名: String) -> bool:
@@ -57,8 +59,12 @@ signal new_player
 signal new_room
 
 
+
 @export var score=0
-var player:Player
+var player:Player:
+	set(value):
+		player=value
+		new_player.emit()
 var current_room:String
 var current_room_ins:Room:
 	set(value):
@@ -81,6 +87,7 @@ func SAVE_CONFIG():
 	config.set_value("audio","Master",GlobalAudio._get_volume(GlobalAudio.bus.Master))
 	config.set_value("audio","BGM",GlobalAudio._get_volume(GlobalAudio.bus.BGM))
 	config.set_value("audio","SFX",GlobalAudio._get_volume(GlobalAudio.bus.SFX))
+	config.set_value("level","passed_level",通关关卡)
 
 	
 	config.save(CONFIG_PATH)

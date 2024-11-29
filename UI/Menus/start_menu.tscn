@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccqlrbusm0rhk"]
+
+[ext_resource type="Texture2D" uid="uid://b6ef08h4h3q6s" path="res://Assets/Texture/Story/3.png" id="1_8dh2a"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackGround" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8dh2a")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(256, 64)
+layout_mode = 0
+offset_left = 856.0
+offset_top = 768.0
+offset_right = 1112.0
+offset_bottom = 832.0
+text = "开始游戏"
+
+[node name="Button2" type="Button" parent="."]
+custom_minimum_size = Vector2(256, 64)
+offset_left = 856.0
+offset_top = 864.0
+offset_right = 1112.0
+offset_bottom = 928.0
+text = "画面设置"
+
+[node name="Button3" type="Button" parent="."]
+custom_minimum_size = Vector2(256, 64)
+offset_left = 856.0
+offset_top = 960.0
+offset_right = 1112.0
+offset_bottom = 1024.0
+text = "退出游戏"

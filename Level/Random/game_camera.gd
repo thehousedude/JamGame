@@ -9,7 +9,7 @@ class_name GameCamera
 
 @export var follow_speed := 10.0
 @export var target_path: NodePath
-@export var target_group: String = "players"
+@export var target_group: String = ""
 
 var follow_target: Node2D = null
 
@@ -81,7 +81,7 @@ func zoom_to(new_zoom: Vector2, duration: float = 0.5, trans_type: Tween.Transit
 	tween.set_ease(ease_type)
 	tween.tween_property(self, "zoom", new_zoom, duration)
 
-func set_follow_target(target: Node2D):
+func set_follow_target(target):
 	follow_target = target
 
 func set_follow_position(pos: Vector2):

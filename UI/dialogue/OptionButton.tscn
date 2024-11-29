@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://djc7wrb63ck6u"]
+
+[ext_resource type="Script" path="res://UI/dialogue/option_button.gd" id="1_acs16"]
+[ext_resource type="Texture2D" uid="uid://b83kmc3a6muxv" path="res://UI/dialogue/DIALOG.png" id="1_tflp1"]
+[ext_resource type="FontFile" uid="uid://cx5ye66bjul2a" path="res://Silver.ttf" id="2_ims5y"]
+
+[node name="OptionButton" type="MarginContainer"]
+custom_minimum_size = Vector2(128, 32)
+anchors_preset = -1
+anchor_right = 0.1
+anchor_bottom = 0.0444444
+script = ExtResource("1_acs16")
+metadata/_edit_use_anchors_ = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_tflp1")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+
+[node name="Label" type="Label" parent="MarginContainer"]
+custom_minimum_size = Vector2(128, 27)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ims5y")
+theme_override_font_sizes/font_size = 19
+text = "啊哇撒大苏打"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="gui_input" from="." to="." method="ongui_input"]

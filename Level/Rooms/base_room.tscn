@@ -1,14 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmdp3qo6nl6ah"]
+[gd_scene load_steps=8 format=3 uid="uid://bmdp3qo6nl6ah"]
 
 [ext_resource type="Script" path="res://Level/Rooms/base_room.gd" id="1_0quum"]
 [ext_resource type="PackedScene" uid="uid://dd6ruw6qhntbu" path="res://TileMap/base_tile_map_layer.tscn" id="1_3cawx"]
 [ext_resource type="PackedScene" uid="uid://dv2s8lisyx1pt" path="res://Level/Random/game_camera.tscn" id="1_t3v6j"]
 [ext_resource type="PackedScene" uid="uid://53slefq2boxi" path="res://Player/player.tscn" id="2_wp3ih"]
+[ext_resource type="PackedScene" uid="uid://c70kf8blabcgm" path="res://Level/Random/teddy.tscn" id="5_ryghb"]
+[ext_resource type="PackedScene" uid="uid://cp532wjrfxyu3" path="res://Level/Random/bed.tscn" id="6_ou5u5"]
+[ext_resource type="Texture2D" uid="uid://c5kv16nkm4sbg" path="res://Level/Random/white_box_line.png" id="7_qht68"]
 
 [node name="BaseRoom" type="Node2D"]
 script = ExtResource("1_0quum")
 
 [node name="BaseTileMapLayer" parent="." instance=ExtResource("1_3cawx")]
+
+[node name="Bed" parent="." instance=ExtResource("6_ou5u5")]
+position = Vector2(223, -7)
 
 [node name="Player" parent="." instance=ExtResource("2_wp3ih")]
 
@@ -17,3 +23,17 @@ target_path = NodePath("../CenterMarker")
 
 [node name="CenterMarker" type="Marker2D" parent="."]
 position = Vector2(240, 135)
+
+[node name="Teddy" parent="." instance=ExtResource("5_ryghb")]
+position = Vector2(128, 0)
+
+[node name="CameraMove" type="Node2D" parent="."]
+
+[node name="WhiteLine" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.205)
+offset_right = 512.0
+offset_bottom = 320.0
+texture = ExtResource("7_qht68")
+stretch_mode = 1
+
+[connection signal="teddy_got" from="Teddy" to="." method="_on_teddy_teddy_got"]

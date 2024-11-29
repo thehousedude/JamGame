@@ -1,0 +1,10 @@
+{
+	"en": {
+	  "greeting": "Hello, how are you?",
+	  "farewell": "Goodbye, see you later!"
+	},
+	"zh": {
+	  "greeting": "你好，最近怎么样？",
+	  "farewell": "再见，下次见！"
+	}
+  }

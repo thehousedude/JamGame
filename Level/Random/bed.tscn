@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cp532wjrfxyu3"]
+
+[ext_resource type="Script" path="res://Level/Random/bed.gd" id="1_0nwvb"]
+[ext_resource type="Texture2D" uid="uid://bcubj5c6wliol" path="res://Level/Random/bed.png" id="1_apybd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0mc31"]
+size = Vector2(40, 10)
+
+[node name="Bed" type="Area2D"]
+script = ExtResource("1_0nwvb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_apybd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_0mc31")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnvt63pu0p3ft"]
+
+[ext_resource type="Script" path="res://UI/dialogue/dialogbox.gd" id="1_75uk0"]
+[ext_resource type="Texture2D" uid="uid://b83kmc3a6muxv" path="res://UI/dialogue/DIALOG.png" id="2_0lhq5"]
+[ext_resource type="FontFile" uid="uid://mh4bnp7jul57" path="res://font/ChillRoundFBold.ttf" id="3_amal4"]
+
+[node name="Dialogbox" type="MarginContainer"]
+offset_right = 144.0
+offset_bottom = 37.0
+script = ExtResource("1_75uk0")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_0lhq5")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer"]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_amal4")
+theme_override_font_sizes/font_size = 38
+text = "你好最近"
+autowrap_mode = 3
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

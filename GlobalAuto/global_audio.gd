@@ -11,8 +11,6 @@ func _set_volume(bus_index:int,v:float):
 	AudioServer.set_bus_volume_db(bus_index,db)
 
 
-
-
 @onready var BGMplayer: AudioStreamPlayer2D = $BGMplayer
 @onready var SEplayers: Node = $SEplayers
 

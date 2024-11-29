@@ -31,7 +31,6 @@ func _trigger_bounce(body:Node2D):
 	if body.has_method("bounce") and body is Player:
 		# 将力沿计算出的方向施加
 		var force_vector = bounce_direction * actual_force
-		
 		body.bounce(force_vector)
 	
 

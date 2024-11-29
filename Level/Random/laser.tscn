@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkvkilx45agpu"]
+
+[ext_resource type="Texture2D" uid="uid://c1t8546he3mvt" path="res://Release/Tilesets/LeftAngle/BlueprintTilesetLeftAngleLight.png" id="1_vlchx"]
+[ext_resource type="Script" path="res://Level/Random/laser_ray_cast_2d.gd" id="2_qqckx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nchid"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfjpa"]
+atlas = ExtResource("1_vlchx")
+region = Rect2(80, 80, 16, 16)
+
+[node name="Laser" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nchid")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_dfjpa")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, -500)
+script = ExtResource("2_qqckx")
+
+[node name="Line2D" type="Line2D" parent="RayCast2D"]
+points = PackedVector2Array(0, 0, 0, -500)
+width = 4.0
+default_color = Color(0.0989556, 0.67405, 0.791561, 1)
